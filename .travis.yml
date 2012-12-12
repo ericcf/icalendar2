@@ -1,0 +1,9 @@
+script: "rake test"
+notifications:
+  email:
+    - ericcf@northwestern.edu
+branches:
+  only:
+    - master
+rvm:
+  - 1.9.3

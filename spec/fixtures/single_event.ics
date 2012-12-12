@@ -1,0 +1,27 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:bsprodidfortestabc123
+CALSCALE:GREGORIAN
+METHOD:REQUEST
+BEGIN:VEVENT
+UID:bsuidfortestabc123
+ORGANIZER:mailto:joebob@random.net
+ATTACH;FMTTYPE=audio/basic:http://example.com/pub/audio-files/ssbanner.aud
+ATTACH:http://example.com/public/quarterly-report.doc
+SUMMARY:This is a really long summary
+  to test the method of unfolding lines\,
+  so I'm just going to ma
+ ke it
+  a whol
+ e
+  bunch of lines.
+CLASS:PRIVATE
+PRIORITY:2
+GEO:37.386013;-122.0829322
+DTSTART;TZID=US-Mountain:20050120T170000
+DTEND:20050120T184500
+DTSTAMP:20050118T211523Z
+CATEGORIES:APPLES,ORANGES,UNICORNS
+EXDATE:19960402T010000Z,19960403T010000Z,19960404T010000Z
+END:VEVENT
+END:VCALENDAR
