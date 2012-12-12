@@ -1,5 +1,7 @@
 # icalendar2 - generate, consume and validate iCalendar feeds
 
+[![Build Status](https://travis-ci.org/ericcf/icalendar2.png)](https://travis-ci.org/ericcf/icalendar2)
+
 ## Warning
 
 This is NOT production ready yet. It has not been extensively tested, and you
