@@ -13,7 +13,8 @@ module Icalendar2
     def self.get_factory(value_sym)
       # :foo => "Foo", :bar_baz => "BarBaz", etc.
       value_name = value_sym.to_s.split(/_/).map(&:capitalize).join('')
-      Icalendar2.const_get("#{value_name}Value", false)
+      value_class_name = "#{value_name}Value"
+      Icalendar2.const_get(value_class_name) if Icalendar2.const_defined?(value_class_name)
     end
 
     def initialize(value)

@@ -2,7 +2,6 @@ module Icalendar2
   module Property
     class Base
       MAX_LINE_LENGTH = 75
-      LIST_SEPARATOR = /(?<!\\),/
 
       attr_reader :value, :parameters
 
@@ -26,7 +25,7 @@ module Icalendar2
 
       def initialize(value, parameters = {})
         @value = if list?
-          value_list = value.respond_to?(:map) ? value : value.split(LIST_SEPARATOR)
+          value_list = value.respond_to?(:gsub) ? split_list(value) : value
           value_list.map { |v| value_object(v) }
         else
           value_object(value)
@@ -55,9 +54,11 @@ module Icalendar2
 
       private
 
+      LIST_SEPARATOR = /([^\\]),/
+
       def validate
         @valid = if @value.is_a? Array
-          @value.all?(&:valid?)
+          @value.compact.all?(&:valid?)
         else
           @value.valid?
         end
@@ -74,6 +75,11 @@ module Icalendar2
 
       def fold(str)
         str.scan(/.{1,#{MAX_LINE_LENGTH}}/).join("#{Tokens::CRLF} ")
+      end
+
+      def split_list(str)
+        # Ruby 1.8.7 doesn't support negative lookbehind, so using this hack...
+        str.gsub(LIST_SEPARATOR, "\\1x,").split(/x,/)
       end
     end
   end

@@ -13,7 +13,7 @@ module Icalendar2
     QSAFE_CHAR =         /[^"#{CONTROL_CHARS}]/
     SAFE_CHAR =          /[^"#{CONTROL_CHARS};:,]/
     VALUE_CHAR =         /[^#{CONTROL_CHARS}]/
-    NON_US_ASCII_CHARS = "\x80-\xFF".force_encoding("UTF-8")
+    NON_US_ASCII_CHARS = "\x80-\xFF"
     QUOTED_STRING =      /#{DQUOTE}(?:#{SAFE_CHAR})*#{DQUOTE}/
     PARAM_VALUE =        "(?:#{SAFE_CHAR})*|#{QUOTED_STRING}"
     IANA_TOKEN =         "[-a-zA-Z0-9]+"

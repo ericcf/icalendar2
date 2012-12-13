@@ -1,11 +1,13 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe "output iCalendar streams are UTF-8 encoded" do
+if "".respond_to?(:encoding)
+  describe "output iCalendar streams are UTF-8 encoded" do
 
-  subject { Calendar.new }
+    subject { Calendar.new }
 
-  its('to_ical.encoding.name') { should eq("UTF-8") }
+    its('to_ical.encoding.name') { should eq("UTF-8") }
+  end
 end
 
 describe "UTF-8 stream input" do

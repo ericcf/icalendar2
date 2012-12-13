@@ -31,7 +31,7 @@ module Icalendar2
       def valid?
         present_property_names = @properties.keys
         @properties.values.flatten.all?(&:valid?) &&
-          self.class.required_property_names.all? { |p| present_property_names.include?(p) }
+          self.class.required_property_names.all? { |p| present_property_names.include?(p.to_s) }
       end
 
       def set_property(property_name, value, parameters = {})
@@ -61,9 +61,9 @@ module Icalendar2
         define_method(property_sym) do |*args|
           value, parameters = *args
           if value.nil?
-            @properties[property_sym]
+            @properties[property_sym.to_s]
           else
-            @properties[property_sym] = Property.get_factory(property_sym).new(value, parameters)
+            @properties[property_sym.to_s] = Property.get_factory(property_sym).new(value, parameters)
           end
         end
         alias_method "#{property_sym}=", property_sym
@@ -72,18 +72,19 @@ module Icalendar2
       def self.define_multiple_accessor(property_sym)
         property_factory = Property.get_factory(property_sym)
         define_method(property_factory::PLURAL) do
-          @properties[property_sym]
+          @properties[property_sym.to_s]
         end
         define_method(property_sym) do |*args|
           value, parameters = *args
-          @properties[property_sym] ||= []
-          @properties[property_sym] << property_factory.new(value, parameters)
+          @properties[property_sym.to_s] ||= []
+          @properties[property_sym.to_s] << property_factory.new(value, parameters)
         end
         alias_method "#{property_sym}=", property_sym
       end
 
       def properties_to_ical
-        @properties.values.flatten.map(&:to_ical).join
+        sorted_properties = @properties.zip.map(&:first).sort
+        sorted_properties.map { |p| p[1] && p[1].to_ical }.join
       end
     end
   end

@@ -8,10 +8,10 @@ module Icalendar2
         Event::VALUE => []
       }
       @properties = {
-        :calscale => Property::Nil.new,
-        :method =>   Property::Nil.new,
-        :prodid =>   Property::Nil.new,
-        :version =>  Property::Nil.new
+        "calscale" => Property::Nil.new,
+        "method" =>   Property::Nil.new,
+        "prodid" =>   Property::Nil.new,
+        "version" =>  Property::Nil.new
       }
     end
 
@@ -32,7 +32,7 @@ module Icalendar2
     end
 
     def set_property(property_name, value, parameters = {})
-      property = property_name.downcase.to_sym
+      property = property_name.to_s.downcase
       if value.nil?
         @properties[property].value.to_s
       elsif (factory = CalendarProperty.get_factory(property_name))
@@ -64,7 +64,9 @@ module Icalendar2
       str = "#{Tokens::COMPONENT_BEGIN}:#{VALUE}#{Tokens::CRLF}"
       str << body_to_ical
       str << "#{Tokens::COMPONENT_END}:#{VALUE}#{Tokens::CRLF}"
-      str.encode("UTF-8")
+      str = str.encode("UTF-8") if str.respond_to?(:encode)
+      
+      str
     end
 
     def add_component(component)
@@ -78,7 +80,8 @@ module Icalendar2
     private
 
     def body_to_ical
-      str = @properties.values.map(&:to_ical).join
+      sorted_properties = @properties.zip.map(&:first).sort
+      str = sorted_properties.map { |p| p[1] && p[1].to_ical }.join
       str << events.map(&:to_ical).join
     end
   end

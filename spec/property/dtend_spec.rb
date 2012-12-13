@@ -5,8 +5,8 @@ describe Icalendar2::Property::Dtend do
   let(:dtend) { Property::Dtend }
 
   it "converts to ical" do
-    dtend.new("20120304T120000").to_ical
-      .should eq("DTEND:20120304T120000#{Tokens::CRLF}")
+    dtend.new("20120304T120000").to_ical.
+      should eq("DTEND:20120304T120000#{Tokens::CRLF}")
   end
 
   it "is valid with a date string" do
@@ -14,7 +14,7 @@ describe Icalendar2::Property::Dtend do
   end
 
   it "accepts params" do
-    dtend.new(Date.new(2012, 1, 2), { "VALUE" => "DATE" }).to_ical
-      .should eq("DTEND;VALUE=DATE:20120102#{Tokens::CRLF}")
+    dtend.new(Date.new(2012, 1, 2), { "VALUE" => "DATE" }).to_ical.
+      should eq("DTEND;VALUE=DATE:20120102#{Tokens::CRLF}")
   end
 end

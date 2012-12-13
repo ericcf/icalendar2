@@ -12,8 +12,8 @@ describe Icalendar2::Property::Base do
     let(:long_text) { "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dignissim egestas magna quis sollicitudin. Aenean quis enim metus." }
 
     it "should fold lines longer than 75 characters" do
-      DummyTextProperty.new(long_text).to_ical
-        .should eq("DUMMY:Lorem ipsum dolor sit amet\\, consectetur adipiscing elit. Nullam dign\r\n issim egestas magna quis sollicitudin. Aenean quis enim metus.\r\n")
+      DummyTextProperty.new(long_text).to_ical.
+        should eq("DUMMY:Lorem ipsum dolor sit amet\\, consectetur adipiscing elit. Nullam dign\r\n issim egestas magna quis sollicitudin. Aenean quis enim metus.\r\n")
     end
   end
 

@@ -7,9 +7,9 @@ describe Icalendar2::Event do
   let(:ical_str) do
 str = <<EOS
 BEGIN:VEVENT
-UID:12345
 DTSTAMP:20121124T081500
 DTSTART:20121203T010203
+UID:12345
 END:VEVENT
 EOS
     str.gsub(/\n/, Tokens::CRLF)

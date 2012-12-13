@@ -4,14 +4,11 @@ module Icalendar2
   class TextValue < Value
 
     def initialize(value)
-      replacements = {
-        '\\' =>     '\\\\',
-        ';' =>      '\;',
-        ',' =>      '\,',
-        "\r\n" =>   "\n",
-        "\r" =>     "\n"
-      }
-      super(value.respond_to?(:gsub) ? value.gsub(/\\|;|,|\r\n|\r/, replacements) : value)
+      if value.respond_to?(:gsub)
+        super(value.gsub(/\\/, "\\\\\\").gsub(';', '\;').gsub(',', '\,').gsub("\r\n", "\n").gsub("\r", "\n"))
+      else
+        super(value)
+      end
     end
   end
 end
