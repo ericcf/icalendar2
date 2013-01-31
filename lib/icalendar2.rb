@@ -53,6 +53,7 @@ module Icalendar2
     autoload :Comment, "icalendar2/property/comment"
     autoload :Contact, "icalendar2/property/contact"
     autoload :Description, "icalendar2/property/description"
+    autoload :Created, "icalendar2/property/description"
     autoload :Dtend, "icalendar2/property/dtend"
     autoload :Dtstamp, "icalendar2/property/dtstamp"
     autoload :Dtstart, "icalendar2/property/dtstart"
