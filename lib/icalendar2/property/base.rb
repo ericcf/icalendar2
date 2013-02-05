@@ -45,10 +45,14 @@ module Icalendar2
         @valid
       end
 
+      def value_str
+        Array(value).map { |v| v.to_s.respond_to?(:strip) ? v.to_s.strip : v }.join(",")
+      end
+
       def to_ical
         parameters_str = @parameters.map { |k, v| "#{k}=#{v}" }.join(";")
         parameters_str = ";#{parameters_str}" if parameters_str != ""
-        str = fold("#{name}#{parameters_str}:#{value}")
+        str = fold("#{name}#{parameters_str}:#{value_str}")
         str << Tokens::CRLF
       end
 
