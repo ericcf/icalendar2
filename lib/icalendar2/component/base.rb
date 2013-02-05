@@ -84,7 +84,7 @@ module Icalendar2
 
       def properties_to_ical
         sorted_properties = @properties.zip.map(&:first).sort
-        sorted_properties.map { |p| p[1] && p[1].to_ical }.join
+        sorted_properties.map { |p| p[1] && Array(p[1]).map(&:to_ical) }.join
       end
     end
   end

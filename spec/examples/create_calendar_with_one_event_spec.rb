@@ -14,6 +14,7 @@ METHOD:PUBLISH
 PRODID:-//ABC Corporation//NONSGML My Product//EN
 VERSION:2.0
 BEGIN:VEVENT
+CATEGORIES:a,b,c
 DESCRIPTION:Thanksgiving dinner with the family.
 DTEND:20121123
 DTSTAMP:20121010T073000
@@ -40,6 +41,7 @@ EOS
         summary     "Eating turkey."
         description "Thanksgiving dinner with the family."
         klass       "PRIVATE"
+        categories  'a, b, c'
       end
     end
 
