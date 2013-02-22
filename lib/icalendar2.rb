@@ -7,7 +7,9 @@ module Icalendar2
   autoload :Tokens, "icalendar2/tokens"
 
   autoload :Component, "icalendar2/component"
+  autoload :Alarm, "icalendar2/component/alarm"
   autoload :Event, "icalendar2/component/event"
+  autoload :Timezone, "icalendar2/component/timezone"
   module Component
     autoload :Base, "icalendar2/component/base"
   end
@@ -44,6 +46,7 @@ module Icalendar2
 
   autoload :Property, "icalendar2/property"
   module Property
+    autoload :Action, "icalendar2/property/action"
     autoload :Base, "icalendar2/property/base"
     autoload :Nil, "icalendar2/property/nil"
     autoload :Attach, "icalendar2/property/attach"
@@ -57,6 +60,7 @@ module Icalendar2
     autoload :Dtend, "icalendar2/property/dtend"
     autoload :Dtstamp, "icalendar2/property/dtstamp"
     autoload :Dtstart, "icalendar2/property/dtstart"
+    autoload :Duration, "icalendar2/property/duration"
     autoload :Exdate, "icalendar2/property/exdate"
     autoload :Geo, "icalendar2/property/geo"
     autoload :LastMod, "icalendar2/property/last_mod"
@@ -64,12 +68,15 @@ module Icalendar2
     autoload :Organizer, "icalendar2/property/organizer"
     autoload :Priority, "icalendar2/property/priority"
     autoload :Rdate, "icalendar2/property/rdate"
+    autoload :Repeat, "icalendar2/property/repeat"
     autoload :Resources, "icalendar2/property/resources"
     autoload :RelatedTo, "icalendar2/property/related_to"
     autoload :Rrule, "icalendar2/property/rrule"
     autoload :Rstatus, "icalendar2/property/rstatus"
     autoload :Sequence, "icalendar2/property/sequence"
     autoload :Summary, "icalendar2/property/summary"
+    autoload :Trigger, "icalendar2/property/trigger"
+    autoload :Tzid, "icalendar2/property/tzid"
     autoload :Uid, "icalendar2/property/uid"
   end
 end

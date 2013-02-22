@@ -17,7 +17,18 @@ module Icalendar2
       end
 
       def initialize
+        @components = {}
         @properties = {}
+      end
+
+      def add_component(component)
+        key = (component.class.to_s.downcase + 's').gsub('icalendar2::', '').to_sym
+
+        unless @components.has_key? key
+          @components[key] = []
+        end
+
+        @components[key] << component
       end
 
       def new_uid

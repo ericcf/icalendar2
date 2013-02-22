@@ -60,6 +60,18 @@ module Icalendar2
       events << event
     end
 
+    def timezones
+      @components[Timezone::VALUE]
+    end
+
+    def timezone(&block)
+      e = Timezone.new
+      e.instance_eval(&block)
+      timezones << e
+
+      e
+    end
+
     def to_ical
       str = "#{Tokens::COMPONENT_BEGIN}:#{VALUE}#{Tokens::CRLF}"
       str << body_to_ical
