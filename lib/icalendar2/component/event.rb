@@ -16,17 +16,39 @@ module Icalendar2
       self.dtstamp = new_timestamp
     end
 
+    # Add a new alarm(s) in a block
+    def alarm(&block)
+      a = Alarm.new
+      self.add_component a
+      a.instance_eval(&block)
+
+      a
+    end
+
+    def alarms
+      @components[:alarms]
+    end
+
     def to_ical
       str = "#{Tokens::COMPONENT_BEGIN}:#{VALUE}#{Tokens::CRLF}"
       str << properties_to_ical
-      #str << alarm_to_ical
+      str << alarm_to_ical
       str << "#{Tokens::COMPONENT_END}:#{VALUE}#{Tokens::CRLF}"
+    end
+
+    def valid?
+      alarms ? alarms.all?(&:valid?) : true
     end
 
     private
 
     def alarm_to_ical
-      #alarm.print if alarm
+      str = ""
+      alarms.each do |a|
+        str << a.to_ical
+      end if alarms
+
+      str
     end
   end
 end
