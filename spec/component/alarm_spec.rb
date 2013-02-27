@@ -15,6 +15,11 @@ describe Icalendar2::Alarm do
       duration "PT15M"
       repeat 1
     end
+    alarm do
+      action "DISPLAY"
+      description "Second alarm"
+      trigger "-PT0S", {"VALUE" => "DURATION"}
+    end
   end
 
   let(:ical_str) do
@@ -31,6 +36,11 @@ DESCRIPTION:First alarm
 DURATION:PT15M
 REPEAT:1
 TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Second alarm
+TRIGGER;VALUE=DURATION:-PT0S
 END:VALARM
 END:VEVENT
 END:VCALENDAR
