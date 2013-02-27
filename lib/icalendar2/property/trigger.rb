@@ -3,7 +3,7 @@ module Icalendar2
     # See http://tools.ietf.org/html/rfc5545#page-72
     class Trigger < Base
       name "TRIGGER"
-      value :types => [:text]
+      value :types => [:text, :text]
     end
   end
 end
