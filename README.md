@@ -56,6 +56,46 @@ calendars.size # 1
 calendars.first.valid? # true
 ```
 
+## Alarms
+
+icalendar2 currently has limited support for alarms. Email and audio actions are not
+yet available as the necessary properties are missing.
+Creating an alarm for an event is relatively straightforward and you can have more than
+one alarm:
+
+```ruby
+calendar = Calendar.new
+calendar.event do
+  summary "Zombie Apocalypse"
+  alarm do
+    trigger "-PT15M", {"VALUE" => "DURATION"}
+    action "DISPLAY"
+    description "Run!"
+  end
+  alarm do
+    trigger "-PT0S"
+    action "DISPLAY"
+    description "Get eaten"
+  end
+end
+puts calendar.to_ical
+# BEGIN:VCALENDAR
+# BEGIN:VEVENT
+# SUMMARY:ALARMING
+# BEGIN:VALARM
+# ACTION:DISPLAY
+# DESCRIPTION:Run!
+# TRIGGER;VALUE=DURATION:-PT15M
+# END:VALARM
+# BEGIN:VALARM
+# ACTION:DISPLAY
+# DESCRIPTION:Get eaten
+# TRIGGER:-PT0S
+# END:VALARM
+# END:VEVENT
+# END:VCALENDAR
+```
+
 ## Improvements over/differences with icalendar gem
 
 While this gem is based on (and borrows some code from) the icalendar gem, it
