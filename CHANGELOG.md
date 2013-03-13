@@ -1,3 +1,6 @@
+0.1.7 2013-03-05
+* Add timezone component
+
 0.1.6 2013-02-27
 * Fix for trigger properties
 
