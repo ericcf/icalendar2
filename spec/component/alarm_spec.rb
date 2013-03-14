@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Icalendar2::Alarm do
 
   cal = Calendar.new
+  subject { cal }
   cal.event do
     summary "An event"
     dtstamp DateTime.new(2012, 11, 24, 8, 15, 0)
