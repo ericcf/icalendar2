@@ -59,9 +59,7 @@ calendars.first.valid? # true
 ## Timezones
 ```ruby
 calendar = Calendar.new
-calendar.event do
-  summary  "Time(warp)zones"
-  Timezone do
+  calendar.timezone do
     tzid  "Europe/London"
     daylight do
       tzoffsetfrom  '+0000'
