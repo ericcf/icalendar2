@@ -56,6 +56,31 @@ calendars.size # 1
 calendars.first.valid? # true
 ```
 
+## Timezones
+```ruby
+calendar = Calendar.new
+calendar.event do
+  summary  "Time(warp)zones"
+  Timezone do
+    tzid  "Europe/London"
+    daylight do
+      tzoffsetfrom  '+0000'
+      rrule         'FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU'
+      dtstart       DateTime.new(1981, 03, 29, 01, 00, 00)
+      tzname        'BST'
+      tzoffsetto    '+0100'
+    end
+    standard do
+      tzoffsetfrom  '+0100'
+      rrule         'FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU'
+      dtstart       DateTime.new(1996, 10, 27, 02, 00, 00)
+      tzname        'GMT'
+      tzoffsetto    '+0000'
+    end
+  end
+end
+```
+
 ## Alarms
 
 icalendar2 currently has limited support for alarms. Email and audio actions are not
