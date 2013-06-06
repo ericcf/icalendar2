@@ -77,6 +77,9 @@ module Icalendar2
     autoload :Summary, "icalendar2/property/summary"
     autoload :Trigger, "icalendar2/property/trigger"
     autoload :Tzid, "icalendar2/property/tzid"
+    autoload :Tzname, "icalendar2/property/tzname"
+    autoload :Tzoffsetfrom, "icalendar2/property/tzoffsetfrom"
+    autoload :Tzoffsetto, "icalendar2/property/tzoffsetto"
     autoload :Uid, "icalendar2/property/uid"
   end
 end

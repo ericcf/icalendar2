@@ -5,7 +5,8 @@ module Icalendar2
 
     def initialize
       @components = {
-        Event::VALUE => []
+        Event::VALUE => [],
+        Timezone::VALUE => []
       }
       @properties = {
         "calscale" => Property::Nil.new,
@@ -72,6 +73,10 @@ module Icalendar2
       e
     end
 
+    def add_timezone(timezone)
+      timezones << timezone
+    end
+
     def to_ical
       str = "#{Tokens::COMPONENT_BEGIN}:#{VALUE}#{Tokens::CRLF}"
       str << body_to_ical
@@ -86,7 +91,7 @@ module Icalendar2
     end
 
     def valid?
-      events.all?(&:valid?)
+      timezones.all?(&:valid?) && events.all?(&:valid?)
     end
 
     private
@@ -94,6 +99,7 @@ module Icalendar2
     def body_to_ical
       sorted_properties = @properties.zip.map(&:first).sort
       str = sorted_properties.map { |p| p[1] && p[1].to_ical }.join
+      str << timezones.map(&:to_ical).join
       str << events.map(&:to_ical).join
     end
   end

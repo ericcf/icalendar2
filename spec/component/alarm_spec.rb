@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Icalendar2::Alarm do
 
   cal = Calendar.new
+  subject { cal }
   cal.event do
     summary "An event"
     dtstamp DateTime.new(2012, 11, 24, 8, 15, 0)
@@ -14,6 +15,11 @@ describe Icalendar2::Alarm do
       trigger "-PT15M"
       duration "PT15M"
       repeat 1
+    end
+    alarm do
+      action "DISPLAY"
+      description "Second alarm"
+      trigger "-PT0S", {"VALUE" => "DURATION"}
     end
   end
 
@@ -31,6 +37,11 @@ DESCRIPTION:First alarm
 DURATION:PT15M
 REPEAT:1
 TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Second alarm
+TRIGGER;VALUE=DURATION:-PT0S
 END:VALARM
 END:VEVENT
 END:VCALENDAR
